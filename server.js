@@ -22,3 +22,56 @@ var PORT = 3000;
 
 // Initialize Express
 var app = express();
+
+// Use morgan logger for logging requests
+app.use(logger("dev"));
+// Use body-parser for handling form submissions
+app.use(bodyParser.urlencoded({ extended: true }));
+// Use express.static to serve the public folder as a static directory
+app.use(express.static("public"));
+
+// Connect to the Mongo DB
+// mongoose.connect("mongodb://localhost/scrapeydoodb");
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scrapeydoodb";
+
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI);
+
+//Routes
+
+//GET route for scraping the NYT website
+app.get("/scrape", function(req, res) {
+    axios.get("https://www.nytimes.com/").then(function (response) {
+
+    var $ = cheerio.load(response.data);
+
+    //grab the h2 of each article
+    $("h2.story-heading").each(function(i, element) {
+        var result = {};
+
+        //add link & title of every link and save them as properties of result object
+        result.link = $(this)
+            .children()
+            .attr("href");
+        result.title = $(this)
+            .children()
+            .text();       
+
+        db.Article.create(result)
+            .then(function(dbArticle) {
+                console.log(dbArticle);
+            })
+            .catch(function(err) {
+
+                return res.json(err)
+            });
+    });
+    //If scrape complete
+    res.send("Scrape complete");
+    });
+});
+
+// Start the server
+app.listen(PORT, function() {
+    console.log("App running on port " + PORT + "!");
+  });
