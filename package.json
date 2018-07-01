@@ -1,0 +1,27 @@
+{
+  "name": "scrapey-doo",
+  "version": "1.0.0",
+  "description": "A web app using Mongoose and Cheerio that lets users view and leave comments on the latest scraped news.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AceKingQueen/Scrapey-Doo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AceKingQueen/Scrapey-Doo/issues"
+  },
+  "homepage": "https://github.com/AceKingQueen/Scrapey-Doo#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^5.1.7",
+    "request": "^2.87.0"
+  }
+}
