@@ -2,7 +2,7 @@
 
 //articles appear with buttons to save
 
-//saved articles /saved
+//saved articles /saved : create another db called save
 
 //each with comment button and delete from save button
 
@@ -72,7 +72,7 @@ app.get("/scrape", function(req, res) {
 });
 
 // Route for getting all Articles from the db
-app.get("/articles", function(req, res) {;
+app.get("/articles", function(req, res) {
     // Grab every document in the Articles collection
     db.Article.find({})
       .then(function(dbArticle) {
@@ -84,6 +84,44 @@ app.get("/articles", function(req, res) {;
         res.json(err);
       });
   });
+
+
+  //Route for saving articles to collection
+app.get("/saved", function(req, res) {
+
+    var savedResult = {};
+
+
+
+    savedResult.link = $(this)
+    .children()
+    .attr("href");
+    savedResult.title = $(this)
+    .children()
+    .text();  
+
+
+    db.Saved.create(savedResult)
+    .then(function(dbSaved) {
+        console.log(dbSaved);
+    })
+    .catch(function(error) {
+        return res.json(error)
+    });
+
+
+    console.log("this is the result" + savedResult);
+
+
+    // db.Saved.find({})
+    // .then(function(dbSaved) {
+    //     res.json(dbSaved);
+    // })
+    // .catch(function(err) {
+    //     res.json(err);
+    // });
+
+}); 
 
 
 // Start the server
