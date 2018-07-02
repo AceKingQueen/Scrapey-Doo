@@ -85,43 +85,24 @@ app.get("/articles", function(req, res) {
       });
   });
 
-
-  //Route for saving articles to collection
-app.get("/saved", function(req, res) {
-
-    var savedResult = {};
-
-
-
-    savedResult.link = $(this)
-    .children()
-    .attr("href");
-    savedResult.title = $(this)
-    .children()
-    .text();  
-
-
-    db.Saved.create(savedResult)
-    .then(function(dbSaved) {
-        console.log(dbSaved);
+app.post('/saved/:id', function(req,res){
+    db.Article.findById(req.params.id, function(err, data) {
+        if (data.saved) {
+            db.Article.findOneAndUpdate({_id: req.params.id}, {saved:false}).then(function(data){
+                res.redirect('/')
+            }).catch(function(err) {
+                res.json(err)
+            })
+        } else {
+            db.Article.findOneAndUpdate({_id: req.params.id}, {saved:true}).then(function(data){
+                res.redirect('/')
+            }).catch(function(err) {
+                res.json(err)
+            })
+        }
     })
-    .catch(function(error) {
-        return res.json(error)
-    });
+})
 
-
-    console.log("this is the result" + savedResult);
-
-
-    // db.Saved.find({})
-    // .then(function(dbSaved) {
-    //     res.json(dbSaved);
-    // })
-    // .catch(function(err) {
-    //     res.json(err);
-    // });
-
-}); 
 
 
 // Start the server
