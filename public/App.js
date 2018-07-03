@@ -1,9 +1,6 @@
 // Grab the articles as a json
   // $("#articles").empty();
 
-
-
-
 function renderPage(saved) {
   $.getJSON("/articles", function(data){
 
@@ -21,8 +18,8 @@ function renderPage(saved) {
             + "<br /><br />"
           );
       };
-      if(saved === "saved" && data[i].saved === true) {
 
+      if(saved === "saved" && data[i].saved === true) {
         $("#articles")
           .append("<p data-id='" + data[i]._id
             + "'>" + data[i].title
@@ -34,21 +31,26 @@ function renderPage(saved) {
           );
       };
     };
-  })
-}
+  });
+
+};
 
 
 $(document).ready(function(){
+  $('.modal').modal();
+
+
   renderPage("default");
 
-})
+
+
+});
 
 
 $(document).on("click", "#save", function () {
 
   var thisId = $(this).attr("data-id");
 
-  alert("article saved");
 
 });
 
@@ -59,7 +61,7 @@ $("#saved-button").on("click", function() {
   $("#articles").empty();
   renderPage("saved");
 
-}) 
+}); 
 
 $("#scrape-button").on("click", function () {
 
