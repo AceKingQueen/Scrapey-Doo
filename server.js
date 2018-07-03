@@ -2,7 +2,7 @@
 
 //articles appear with buttons to save
 
-//saved articles /saved : create another db called save
+//saved articles /saved 
 
 //each with comment button and delete from save button
 

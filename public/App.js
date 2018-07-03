@@ -1,15 +1,8 @@
-
 // Grab the articles as a json
-$("#scrape-button").on("click", function () {
-
-  $.getJSON("/scrape", function (data) {
+  // $("#articles").empty();
 
 
-    
-  });
 
-  window.location.reload()
-});
 
 function renderPage(saved) {
   $.getJSON("/articles", function(data){
@@ -44,11 +37,12 @@ function renderPage(saved) {
   })
 }
 
-$("#saved-button").on("click", function() {
-  
-  $("#articles").empty();
-  renderPage("saved");
-}) 
+
+$(document).ready(function(){
+  renderPage("default");
+
+})
+
 
 $(document).on("click", "#save", function () {
 
@@ -58,9 +52,21 @@ $(document).on("click", "#save", function () {
 
 });
 
-$(document).ready(function(){
-  renderPage("default");
-})
 
 
+$("#saved-button").on("click", function() {
+  
+  $("#articles").empty();
+  renderPage("saved");
 
+}) 
+
+$("#scrape-button").on("click", function () {
+
+  $.getJSON("/scrape", function (data) {
+
+
+  });
+
+  window.location.reload()
+});
