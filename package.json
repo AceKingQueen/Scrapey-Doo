@@ -17,13 +17,13 @@
   },
   "homepage": "https://github.com/AceKingQueen/Scrapey-Doo#readme",
   "dependencies": {
-    "axios": "^0.18.0",
-    "body-parser": "^1.18.3",
-    "cheerio": "^1.0.0-rc.2",
-    "express": "^4.16.3",
-    "express-handlebars": "^3.0.0",
-    "mongoose": "^5.1.7",
-    "morgan": "^1.9.0",
-    "request": "^2.87.0"
+    "axios": "^0.18.1",
+    "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.3",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "mongoose": "^5.6.3",
+    "morgan": "^1.9.1",
+    "request": "^2.88.0"
   }
 }
